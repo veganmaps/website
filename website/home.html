@@ -1,56 +1,151 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>VeganMaps</title>
-    <meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" />
-<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bootstrap-theme.css">
-<link href="css/responsive-slider.css" rel="stylesheet">
-<link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ <style>
+ body {
+     position: relative;
+}
+ .page-header {
+   padding-top: 50px
+ }
+ .container-fluid {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+ #section1 {color: #fff; background-color: #1E88E5;}
+ #section2 {color: #fff; background-color: #673ab7;}
+ #section3 {color: #fff; background-color: #ff9800;}
+ #navbar {padding: 20px}
+ #head {padding: 50px}
+
+ </style>
 
   </head>
+  <body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div id="head" class="container">
+      <div class="page-header">
+        <h1>Vegan Maps</h1>
+      </div>
+      <p>Enter your dietary restrictions and zipcode to find nearby restaurants that suit your needs!</p>
+        <div class:"input-group-btn">
+        <div class="dropdown" id="dropdown1">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="dropDownButton">Dietary Restrictions
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <center><a id="vegan" data-somestringvalue-text="Vegan" onClick="">Vegan</a></center>
+            <li class="divider"></li>
+            <center><a id="vegetarian">Vegetarian</a></center>
+          </ul>
+          <input type="text" name="text" placeholder="Enter city">
+          <button id="go"><a href="#section1">Go!</a></button>
+        </div>
+      </div>
+    </div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div id="navbar" class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Vegan Maps</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="#section1">Section 1</a></li>
+          <li><a href="#section2">Section 2</a></li>
+          <li><a href="#section3">Section 3</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
 
-  <body>
+<div id="section1" class="container-fluid">
+  <h1>Nearest Restaurants</h1>
+  <p>my homegirl priya is going to add the mapbox api here !!</p>
 
-    <div class="header">
-  	<section id="header" class="appear">
+</div>
+<div id="section2" class="container-fluid">
+  <h1>Restaurant List</h1>
+  <p>Let's get lit w 4square</p>
+</div>
+<div id="section3" class="container-fluid">
+  <h1>Contact Us</h1>
+  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+  <form>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="name" class="form-control" id="name" placeholder="Enter name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+    </div>
+    <div class="form-group">
+      <label for="message">Message:</label>
+      <input type="message" class="form-control" id="message" placeholder="Enter message">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
 
-  		<div class="navbar navbar-fixed-top" role="navigation" data-0="line-height:100px;
-      height:100px; background-color:#87D68D;" data-300="line-height:60px; height:60px; background-color:#87D68D;">
+<script>
+$(document).ready(function(){
+  // Add scrollspy to <body>
+  $('body').scrollspy({target: ".button", offset: 50});
 
-  				<div class="navbar-header">
-  					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-  						<span class="fa fa-bars color-white"></span>
-  					</button>
-  					<h1><a class="navbar-brand" href="home.html" data-0="line-height:90px;"
-              data-300="line-height:50px;">Vegan Maps
-  					</a></h1>
-  				</div>
-  				<div class="navbar-collapse collapse">
-  					<ul class="nav navbar-nav" data-0="margin-top:20px;" data-300="margin-top:5px;">
-  						<li class="active"><a href="#index">Home</a></li>
-  						<li><a href="#section-about">About</a></li>
-  						<li><a href="#section-contact">Contact</a></li>
-  					</ul>
-  				</div><!--/.navbar-collapse -->
-  			</div>
+  // Add smooth scrolling on all links inside the navbar
+  $("#go a").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
 
+      // Store hash
+      var hash = this.hash;
 
-  	</section>
-  	</div>
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
 
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    }  // End if
+  });
 
+// function selectVegan(){
+//     dropDownButton.button('somestringvalue');
+// }
 
+document.getElementById("vegan").onclick = function(){//do something}
+  console.log("test");
+  document.getElementById("dropDownButton").innerHTML = "Vegan";
+}
+document.getElementById("vegetarian").onclick = function(){//do something}
+  console.log("test");
+  document.getElementById("dropDownButton").innerHTML = "Vegetarian";
+}
 
+});
 
+</script>
 
-
-
-</body>
-<html>
+	</body>
+</html>
