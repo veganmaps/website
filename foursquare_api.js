@@ -67,21 +67,20 @@ function setFourSquareArray(){
 
 
       for (var i = 0; i < data.response.groups[0].items.length; i++) {
-        document.write(data.response.groups[0].items[i].venue.name + "</br>");
-        document.write(data.response.groups[0].items[i].venue.categories[0].shortName + "</br>");
+        document.getElementById("list").innerHTML = (data.response.groups[0].items[i].venue.name + "</br>");
+        document.getElementById("list").innerHTML = (data.response.groups[0].items[i].venue.categories[0].shortName + "</br>");
           var blegh = data.response.groups[0].items[i].venue.location.address;
           console.log(blegh);
           if (typeof blegh == "undefined"){
             data.response.groups[0].items[i].venue.location.address = "Address unknown";
           }
-        document.write(data.response.groups[0].items[i].venue.location.address + " ");
-        document.write(data.response.groups[0].items[i].venue.location.city + " ");
-        document.write(data.response.groups[0].items[i].venue.location.country + "</br>");
+        document.getElementById("list").innerHTML = (data.response.groups[0].items[i].venue.location.address + " ");
+        document.getElementById("list").innerHTML = (data.response.groups[0].items[i].venue.location.city + " ");
+        document.getElementById("list").innerHTML = (data.response.groups[0].items[i].venue.location.country + "</br>");
 //document.write(data.response.groups[0].items[i].reasons.items[0].summary + "</br>"); REASON: always = "this spot is popular"
-        document.write("</br>")
-        document.write("</br>")
+        document.getElementById("list").innerHTML = ("</br>")
+        document.getElementById("list").innerHTML = ("</br>")
       }
-
       console.log(data);
     },
     error: function(request, data, error)
@@ -94,4 +93,3 @@ function setFourSquareArray(){
 }
 
 //use ajax
-

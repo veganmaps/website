@@ -7,7 +7,48 @@
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+ <!-- Mobile Stylesheet -->
+ <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+ <!-- Load JQuery -->
+ <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+ <!-- Load JQuery Mobile -->
+ <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+ <script src="foursquare_api.js" type="text/javascript"></script>
+ <script type="text/javascript">
+ function setFourSquareArray(){
+   $.ajax({
+     type: 'GET',
+     url: base_url,
+     dataType: 'json',
+     crossDomain: true,
+     success: function(data){
+       console.log("i've successfully read the json code");
+       for (var i = 0; i < data.response.groups[0].items.length; i++) {
+         document.getElementById('list').innerHTML = (data.response.groups[0].items[i].venue.name + "</br>");
+         document.getElementById('list').innerHTML = (data.response.groups[0].items[i].venue.categories[0].shortName + "</br>");
+           var blegh = data.response.groups[0].items[i].venue.location.address;
+           console.log(blegh);
+           if (typeof blegh == "undefined"){
+             data.response.groups[0].items[i].venue.location.address = "Address unknown";
+           }
+         document.getElementById('list').innerHTML =
+         (data.response.groups[0].items[i].venue.location.address + " " +
+         data.response.groups[0].items[i].venue.location.city + " " + data.response.groups[0].items[i].venue.location.country + "</br>");
+         //document.getElementById('list').innerHTML = (data.response.groups[0].items[i].venue.location.city + " ");
+        // document.getElementById('list').innerHTML = (data.response.groups[0].items[i].venue.location.country + "</br>");
+ //document.write(data.response.groups[0].items[i].reasons.items[0].summary + "</br>"); REASON: always = "this spot is popular"
+        // document.getElementById('list').innerHTML = ("</br>")
+        // document.getElementById('list').innerHTML = ("</br>")
+       }
+       console.log(data);
+     },
+     error: function(request, data, error)
+     {
+       console.log("dammit");
+     }
+   })
+ }
+ </script>
  <style>
  body {
      position: relative;
@@ -26,8 +67,8 @@
  #head {padding: 50px}
 
  </style>
-
   </head>
+
   <body data-spy="scroll" data-target=".navbar" data-offset="50">
     <div id="head" class="container">
       <div class="page-header">
@@ -44,7 +85,7 @@
             <center><a id="vegetarian">Vegetarian</a></center>
           </ul>
           <input type="text" name="text" placeholder="Enter city">
-          <button id="go"><a href="#section1">Go!</a></button>
+          <button onclick= setFourSquareArray() id="go"><a href="#section2">Go!</a></button>
         </div>
       </div>
     </div>
@@ -72,12 +113,12 @@
 
 <div id="section1" class="container-fluid">
   <h1>Nearest Restaurants</h1>
-  <p>my homegirl priya is going to add the mapbox api here !!</p>
+  <p>my homegirl dhanya is going to add the mapbox api here !!</p>
 
 </div>
 <div id="section2" class="container-fluid">
   <h1>Restaurant List</h1>
-  <p>Let's get lit w 4square</p>
+  <p id="list">help us</p>
 </div>
 <div id="section3" class="container-fluid">
   <h1>Contact Us</h1>
@@ -102,50 +143,6 @@
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </div>
-
-<script>
-$(document).ready(function(){
-  // Add scrollspy to <body>
-  $('body').scrollspy({target: ".button", offset: 50});
-
-  // Add smooth scrolling on all links inside the navbar
-  $("#go a").on('click', function(event) {
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 800, function(){
-
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    }  // End if
-  });
-
-// function selectVegan(){
-//     dropDownButton.button('somestringvalue');
-// }
-
-document.getElementById("vegan").onclick = function(){//do something}
-  console.log("test");
-  document.getElementById("dropDownButton").innerHTML = "Vegan";
-}
-document.getElementById("vegetarian").onclick = function(){//do something}
-  console.log("test");
-  document.getElementById("dropDownButton").innerHTML = "Vegetarian";
-}
-
-});
-
-</script>
 
 	</body>
 </html>
