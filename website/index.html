@@ -19,7 +19,22 @@
 
 <body>
   <p>  Text goes here.</p>
+
+  <div class:"input-group-btn">
+  <div class="dropdown" id="dropdown1">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="dropDownButton">Dietary Restrictions
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      <center><a id="vegan" data-somestringvalue-text="Vegan" onClick="">Vegan</a></center>
+      <li class="divider"></li>
+      <center><a id="vegetarian">Vegetarian</a></center>
+    </ul>
+    <input type="text" name="text" placeholder="Enter city">
+    <button id="go"><a href="#section2">Go!</a></button>
+  </div>
+</div>
 </body>
+
 
 <script>
 $(document).ready(function(){
