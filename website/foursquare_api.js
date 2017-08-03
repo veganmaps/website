@@ -21,11 +21,13 @@ $(document).ready(function() //waits for the document to all be ready before pro
     longi = coordinates.longitude;
     console.log(lat);
     console.log(longi);
-    near = prompt("Location? ");
+    //near = prompt("Location? ");
+		near = document.getElementById("myForm").elements[0].value;
     near = near.replace(" ", "%20");
-    query = prompt("What type of food? (vegan, vegetarian, halal, donuts etc.)");
-    query = query.replace(' ', '%20');
-    makeURL();
+    //query = prompt("What type of food? (vegan, vegetarian, halal, donuts etc.)");
+    query = document.getElementById("myForm").elements[1].value;
+		query = query.replace(' ', '%20');
+    //makeURL();
 	};
 
 
@@ -65,19 +67,39 @@ function setFourSquareArray(){
       console.log("i've successfully read the json code");
 
 
-      for (var i = 0; i < data.response.groups[0].items.length; i++) {
-    /*    document.getElementById('list').innerHTML = (data.response.groups[0].items[i].venue.name + "</br>");
-        document.getElementById('category').innerHTML = (data.response.groups[0].items[i].venue.categories[0].shortName + "</br>");
+      for (var i = 0; i < data.response.groups[0].items.length; i++)
+			{
           var blegh = data.response.groups[0].items[i].venue.location.address;
-          console.log(blegh);
           if (typeof blegh == "undefined"){
             data.response.groups[0].items[i].venue.location.address = "Address unknown";
           }
+					var tempLoc = [];
+					var ugh1 = data.response.groups[0].items[i].venue.url;
+					if (typeof ugh1 == "undefined"){
+					 data.response.groups[0].items[i].venue.url = "URL unknown";
+					 }
+					var ugh2 = data.response.groups[0].items[i].venue.rating;
+					if (typeof ugh2 == "undefined"){
+					 data.response.groups[0].items[i].venue.rating = "No Rating Yet";
+					}
+					tempLoc.push(data.response.groups[0].items[i].venue.name);
+					tempLoc.push(data.response.groups[0].items[i].venue.categories[0].shortName);
+					tempLoc.push(data.response.groups[0].items[i].venue.location.formattedAddress);
+					tempLoc.push(data.response.groups[0].items[i].venue.location.lat);
+					tempLoc.push(data.response.groups[0].items[i].venue.location.lng);
+					tempLoc.push(data.response.groups[0].items[i].venue.rating);
+					tempLoc.push(data.response.groups[0].items[i].venue.url);
+
+					//console.log(tempLoc);
+					locationArray.push(tempLoc);
+
+
+
+
+
+
         document.getElementById('address').innerHTML = (data.response.groups[0].items[i].venue.location.address + " " +
 				data.response.groups[0].items[i].venue.location.city + "</br>" + data.response.groups[0].items[i].venue.location.country + "</br>");
-//document.write(data.response.groups[0].items[i].reasons.items[0].summary + "</br>"); REASON: always = "this spot is popular"
-      //  document.write("</br>")
-        //document.write("</br>") */
 				var currentFeature = data.response.groups[0].items[i];
 				var prop = currentFeature.venue;
 					 // Select the listing container in the HTML and append a div
@@ -101,39 +123,30 @@ function setFourSquareArray(){
 					/* if (prop.phone) {
 						 details.innerHTML += ' &middot; ' + prop.phoneFormatted; */
 
-						 var tempLoc = [];
-						 var ugh1 = data.response.groups[0].items[i].venue.url;
-						 if (typeof ugh1 == "undefined"){
-						 	data.response.groups[0].items[i].venue.url = "URL unknown";
-						 	}
-						 var ugh2 = data.response.groups[0].items[i].venue.rating;
-						 if (typeof ugh2 == "undefined"){
-						 	data.response.groups[0].items[i].venue.rating = "No Rating Yet";
-						 }
-						 tempLoc.push(data.response.groups[0].items[i].venue.name);
-						 tempLoc.push(data.response.groups[0].items[i].venue.categories[0].shortName);
-						 tempLoc.push(data.response.groups[0].items[i].venue.location.formattedAddress);
-						 tempLoc.push(data.response.groups[0].items[i].venue.location.lat);
-						 tempLoc.push(data.response.groups[0].items[i].venue.location.lng);
-						 tempLoc.push(data.response.groups[0].items[i].venue.rating);
-						 tempLoc.push(data.response.groups[0].items[i].venue.url);
-
-						 console.log(tempLoc);
-						 locationArray.push(tempLoc);
 
 
 			}
 
       console.log(data);
+			printPlaces();
+    },
+    error: function(request, data, error)
+  {
+     console.log("dammit");
     }
-    // error: function(request, data, error)
-  //  {
-    //  console.log("dammit");
-    //}
   })
 
 
 }
+function printPlaces()
+{
+	document.getElementById("first-place").innerHTML = locationArray[0];
+}
 
-
-//use ajax
+function nearQueryReplace() {
+		locationArray = [];
+		near = document.getElementById("myForm").elements[0].value;
+		query = document.getElementById("myForm").elements[1].value;
+		console.log("here are the places that came from the new search!!! pirya");
+		makeURL();
+}
