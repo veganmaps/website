@@ -9,7 +9,7 @@ var time = "any";
 var day = "any";
 var venuePhotos = 1;
 var sortByDistance = 1;
-
+var locationArray = [];
 
 
 $(document).ready(function() //waits for the document to all be ready before proceeding (al html loaded etc)
@@ -100,7 +100,29 @@ function setFourSquareArray(){
 					 details.innerHTML = (prop.categories[0].shortName + "</br>" + prop.location.address + "</br>" + prop.location.city + "</br" + prop.location.country);
 					/* if (prop.phone) {
 						 details.innerHTML += ' &middot; ' + prop.phoneFormatted; */
-      }
+
+						 var tempLoc = [];
+						 var ugh1 = data.response.groups[0].items[i].venue.url;
+						 if (typeof ugh1 == "undefined"){
+						 	data.response.groups[0].items[i].venue.url = "URL unknown";
+						 	}
+						 var ugh2 = data.response.groups[0].items[i].venue.rating;
+						 if (typeof ugh2 == "undefined"){
+						 	data.response.groups[0].items[i].venue.rating = "No Rating Yet";
+						 }
+						 tempLoc.push(data.response.groups[0].items[i].venue.name);
+						 tempLoc.push(data.response.groups[0].items[i].venue.categories[0].shortName);
+						 tempLoc.push(data.response.groups[0].items[i].venue.location.formattedAddress);
+						 tempLoc.push(data.response.groups[0].items[i].venue.location.lat);
+						 tempLoc.push(data.response.groups[0].items[i].venue.location.lng);
+						 tempLoc.push(data.response.groups[0].items[i].venue.rating);
+						 tempLoc.push(data.response.groups[0].items[i].venue.url);
+
+						 console.log(tempLoc);
+						 locationArray.push(tempLoc);
+
+
+			}
 
       console.log(data);
     }
