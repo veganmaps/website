@@ -66,30 +66,52 @@ function setFourSquareArray(){
 
 
       for (var i = 0; i < data.response.groups[0].items.length; i++) {
-        document.write(data.response.groups[0].items[i].venue.name + "</br>");
-        document.write(data.response.groups[0].items[i].venue.categories[0].shortName + "</br>");
+    /*    document.getElementById('list').innerHTML = (data.response.groups[0].items[i].venue.name + "</br>");
+        document.getElementById('category').innerHTML = (data.response.groups[0].items[i].venue.categories[0].shortName + "</br>");
           var blegh = data.response.groups[0].items[i].venue.location.address;
           console.log(blegh);
           if (typeof blegh == "undefined"){
             data.response.groups[0].items[i].venue.location.address = "Address unknown";
           }
-        document.write(data.response.groups[0].items[i].venue.location.address + " ");
-        document.write(data.response.groups[0].items[i].venue.location.city + " ");
-        document.write(data.response.groups[0].items[i].venue.location.country + "</br>");
+        document.getElementById('address').innerHTML = (data.response.groups[0].items[i].venue.location.address + " " +
+				data.response.groups[0].items[i].venue.location.city + "</br>" + data.response.groups[0].items[i].venue.location.country + "</br>");
 //document.write(data.response.groups[0].items[i].reasons.items[0].summary + "</br>"); REASON: always = "this spot is popular"
-        document.write("</br>")
-        document.write("</br>")
+      //  document.write("</br>")
+        //document.write("</br>") */
+				var currentFeature = data.response.groups[0].items[i];
+				var prop = currentFeature.venue;
+					 // Select the listing container in the HTML and append a div
+					 // with the class 'item' for each store
+					 var listings = document.getElementById('section2');
+					 var listing = listings.appendChild(document.createElement('div'));
+					 listing.className = 'item';
+					 listing.id = 'section2-' + i;
+
+					 // Create a new link with the class 'title' for each store
+					 // and fill it with the store address
+					 var link = listing.appendChild(document.createElement('a'));
+					 link.href = '#';
+					 link.className = 'title';
+					 link.dataPosition = i;
+					 link.innerHTML = (prop.name);
+					 // Create a new div with the class 'details' for each store
+					 // and fill it with the city and phone number
+					 var details = listing.appendChild(document.createElement('div'));
+					 details.innerHTML = (prop.categories[0].shortName + "</br>" + prop.location.address + "</br>" + prop.location.city + "</br" + prop.location.country);
+					/* if (prop.phone) {
+						 details.innerHTML += ' &middot; ' + prop.phoneFormatted; */
       }
 
       console.log(data);
-    },
-    error: function(request, data, error)
-    {
-      console.log("dammit");
     }
+    // error: function(request, data, error)
+  //  {
+    //  console.log("dammit");
+    //}
   })
 
 
 }
+
 
 //use ajax
