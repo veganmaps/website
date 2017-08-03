@@ -22,10 +22,11 @@ $(document).ready(function() //waits for the document to all be ready before pro
     console.log(lat);
     console.log(longi);
     //near = prompt("Location? ");
-		near = document.getElementById("myForm").elements[0].value;
+		near = document.getElementById("location-input").value;
     near = near.replace(" ", "%20");
     //query = prompt("What type of food? (vegan, vegetarian, halal, donuts etc.)");
-    query = document.getElementById("myForm").elements[1].value;
+    query = document.getElementById("food-input").value;
+		console.log(query)
 		query = query.replace(' ', '%20');
     //makeURL();
 	};
@@ -98,7 +99,7 @@ function setFourSquareArray(){
 
 
 
-        document.getElementById('address').innerHTML = (data.response.groups[0].items[i].venue.location.address + " " +
+        document.getElementById('section2').innerHTML = (data.response.groups[0].items[i].venue.location.address + " " +
 				data.response.groups[0].items[i].venue.location.city + "</br>" + data.response.groups[0].items[i].venue.location.country + "</br>");
 				var currentFeature = data.response.groups[0].items[i];
 				var prop = currentFeature.venue;
@@ -128,7 +129,7 @@ function setFourSquareArray(){
 			}
 
       console.log(data);
-			printPlaces();
+			//printPlaces();
     },
     error: function(request, data, error)
   {
@@ -138,15 +139,15 @@ function setFourSquareArray(){
 
 
 }
-function printPlaces()
+/*function printPlaces()
 {
 	document.getElementById("first-place").innerHTML = locationArray[0];
-}
+} */
 
 function nearQueryReplace() {
 		locationArray = [];
-		near = document.getElementById("myForm").elements[0].value;
-		query = document.getElementById("myForm").elements[1].value;
+		near = document.getElementById("location-input").value;
+		query = document.getElementById("food-input").value;
 		console.log("here are the places that came from the new search!!! pirya");
 		makeURL();
 }
