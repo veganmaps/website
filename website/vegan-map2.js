@@ -92,6 +92,11 @@ function setFourSquareArray(){
 				tempLoc.push(data.response.groups[0].items[i].venue.location.lng);
 				tempLoc.push(data.response.groups[0].items[i].venue.rating);
 				tempLoc.push(data.response.groups[0].items[i].venue.url);
+				tempLoc.push(data.response.groups[0].items[i].venue.contact.formattedPhone)
+
+				lat = data.response.geocode.center.lat;
+				longi = data.response.geocode.center.lng;
+
 
 				console.log(tempLoc);
 				locationArray.push(tempLoc);
@@ -124,11 +129,12 @@ function initMap()
 {
   console.log("gvasghjvdasgkhj");
   mapboxgl.accessToken = 'pk.eyJ1IjoiZGhhbnlhIiwiYSI6ImNqNXY5ZjBvcDBlaHcycXMzYXZvODdrbGkifQ.xCbroOR-qaieJKlfV9NHCA';
+	console.log(lat + '' + longi);
   map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
-    center: [-96, 37.8],
-    zoom: 3
+    center: [longi, lat],
+    zoom: 12
 
   });
   map.addControl(new mapboxgl.NavigationControl());
@@ -157,7 +163,9 @@ function createMarkers()
       },
       properties: {
         title: locationArray[i][0] ,
-        description: locationArray[i][2][0] + "\n" + locationArray[i][2][1] + "\n" + locationArray[i][2][2]
+        description: locationArray[i][2][0] + "\n" + locationArray[i][2][1] + "\n" + locationArray[i][2][2] ,
+				link: locationArray[i][6] ,
+				phone: locationArray[i][7]
       },
     };
     geojson.features.push(tempFeature);
@@ -174,6 +182,8 @@ function createMarkers()
     // make a marker for each feature and add to the map
     new mapboxgl.Marker(el, { offset: [0, -50 / 2] })
     .setLngLat(marker.geometry.coordinates)
+		.setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+		.setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>' + marker.properties.link + '</p>' + marker.properties.phone))
 
 
     .addTo(map);
