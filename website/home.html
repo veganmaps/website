@@ -73,6 +73,10 @@
             <center><a id="kosher">Kosher</a></center>
             <li class="divider"></li>
             <center><a id="gluten-free">Gluten Free</a></center>
+            <li class="divider"></li>
+<!--            <center><input type="text" id="rest-input" name="text" placeholder="Other"></center>-->
+<input id="other-input" type="text" name="text" placeholder="Other">
+
           </ul>
           <input id="location-input" type="text" name="text" placeholder="Enter city">
           <input id="food-input" type="text" name="text" placeholder="Enter food">
@@ -159,6 +163,7 @@
         });
       }  // End if
     });
+
   /*  $(".dropdown").on("hide.bs.dropdown", function(){
       $(".btn").html('Dietary Restrictions <span class="caret"></span>');
     });
@@ -185,9 +190,17 @@
       console.log("test");
       document.getElementById("dropDownButton").innerHTML = "Gluten Free";
     }
+    // document.getElementById("rest-input").onclick = function(){//do something}
+    //   var text = document.getElementById("dropDownButton").value;
+    //   console.log(document.getElementById("dropDownButton").value);
+    //   document.getElementById('rest-input').innerHTML = text; // display
+    //   // document.getElementById("dropDownButton").innerHTML = input;
+    // }
 
 
   });
+
+  console.log(document.getElementById("other-input").value);
 
   </script>
 

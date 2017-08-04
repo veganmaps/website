@@ -94,13 +94,9 @@ function setFourSquareArray(){
 					//console.log(tempLoc);
 					locationArray.push(tempLoc);
 
-
-
-
-
-
-        document.getElementById('section2').innerHTML = (data.response.groups[0].items[i].venue.location.address + " " +
-				data.response.groups[0].items[i].venue.location.city + "</br>" + data.response.groups[0].items[i].venue.location.country + "</br>");
+        /*document.getElementById('section2').innerHTML = (data.response.groups[0].items[i].venue.location.address + " " +
+				data.response.groups[0].items[i].venue.location.city + "</br>" + data.response.groups[0].items[i].venue.location.country
+				 + "</br>"); */
 				var currentFeature = data.response.groups[0].items[i];
 				var prop = currentFeature.venue;
 					 // Select the listing container in the HTML and append a div
@@ -113,18 +109,16 @@ function setFourSquareArray(){
 					 // Create a new link with the class 'title' for each store
 					 // and fill it with the store address
 					 var link = listing.appendChild(document.createElement('a'));
-					 link.href = '#';
+					 link.href = prop.url;
 					 link.className = 'title';
 					 link.dataPosition = i;
 					 link.innerHTML = (prop.name);
 					 // Create a new div with the class 'details' for each store
 					 // and fill it with the city and phone number
 					 var details = listing.appendChild(document.createElement('div'));
-					 details.innerHTML = (prop.categories[0].shortName + "</br>" + prop.location.address + "</br>" + prop.location.city + "</br" + prop.location.country);
+					 details.innerHTML = (prop.categories[0].shortName + "</br>" + prop.location.formattedAddress);
 					/* if (prop.phone) {
 						 details.innerHTML += ' &middot; ' + prop.phoneFormatted; */
-
-
 
 			}
 
@@ -148,6 +142,7 @@ function nearQueryReplace() {
 		locationArray = [];
 		near = document.getElementById("location-input").value;
 		query = document.getElementById("food-input").value;
+		console.log(document.getElementById("other-input").value);
 		console.log("here are the places that came from the new search!!! pirya");
 		makeURL();
 }
