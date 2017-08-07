@@ -10,11 +10,11 @@
  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+ <link href='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.1.0/mapbox-gl-geocoder.css' type='text/css' />
  <style>
- body {
-     position: relative;
-}
+
 
 #map { position:absolute; top:50; bottom:600; width:100%; height:40% }
 .marker {
@@ -100,7 +100,7 @@ a {
           </ul>
           <input id="location-input" type="text" name="text" placeholder="Enter city">
           <input id="food-input" type="text" name="text" placeholder="Enter food">
-          <button id="go" onclick="initMap()"><a href="#section1">Go!</a></button>
+          <button id="go" onclick="makeURL()"><a href="#section1">Go!</a></button>
         </div>
       </div>
     </div>
@@ -126,11 +126,10 @@ a {
 
 <div id="section1" class="container-fluid">
   <h1>Nearest Restaurants</h1>
-  <div class=wrapper>
-    <div id='map'></div>
+  <div>
+  <div id='map'></div>
 </div>
   <script src= "vegan-map2.js"></script>
-  <p>my homegirl dhanya is going to add the mapbox api here !!</p>
 </div>
 <div id="section2" class="container-fluid">
   <h1>Restaurant List</h1>

@@ -26,13 +26,9 @@ $(document).ready(function() //waits for the document to all be ready before pro
     longi = coordinates.longitude;
     console.log(lat);
     console.log(longi);
-		near = document.getElementById("location-input").value;
-    near = near.replace(" ", "%20");
-    query = document.getElementById("food-input").value;
-    query = query.replace(' ', '%20');
-    makeURL();
+		blankMap();
+  //  makeURL();
 	};
-
 
   function error(err) // if the user declines to give loocal address
   {
@@ -45,6 +41,11 @@ $(document).ready(function() //waits for the document to all be ready before pro
 
 function makeURL() // all the appends
 {
+	near = document.getElementById("location-input").value;
+	near = near.replace(" ", "%20");
+	query = document.getElementById("food-input").value;
+	query = query.replace(' ', '%20');
+
   base_url += "&ll=" + lat + "," + longi;
   base_url += "&near=" + near;
   base_url += "&radius=" + radius;
@@ -68,18 +69,16 @@ function setFourSquareArray(){
 
     success: function(data){
       console.log("i've successfully read the json code!!!");
+			console.log(base_url);
 
-
-      for (var i = 0; i < data.response.groups[0].items.length; i++) {
-				console.log("reading lat");
+      for (var i = 0; i < data.response.groups[0].items.length; i++)
+			{
+			//editing the address
+				console.log("editing undefined stuff");
         var blegh = data.response.groups[0].items[i].venue.location.address;
-          console.log(blegh);
-          if (typeof blegh == "undefined"){
-            data.response.groups[0].items[i].venue.location.address = "Address unknown";
-          }
-
-
-				var tempLoc = [];
+        if (typeof blegh == "undefined"){
+          data.response.groups[0].items[i].venue.location.address = "Address unknown";
+        }
 				var ugh1 = data.response.groups[0].items[i].venue.url;
 				if (typeof ugh1 == "undefined"){
 					data.response.groups[0].items[i].venue.url = "URL unknown";
@@ -88,6 +87,8 @@ function setFourSquareArray(){
 				if (typeof ugh2 == "undefined"){
 					data.response.groups[0].items[i].venue.rating = "No Rating Yet";
 				}
+
+				var tempLoc = [];
 				tempLoc.push(data.response.groups[0].items[i].venue.name);
 				tempLoc.push(data.response.groups[0].items[i].venue.categories[0].shortName);
 				tempLoc.push(data.response.groups[0].items[i].venue.location.formattedAddress);
@@ -95,14 +96,9 @@ function setFourSquareArray(){
 				tempLoc.push(data.response.groups[0].items[i].venue.location.lng);
 				tempLoc.push(data.response.groups[0].items[i].venue.rating);
 				tempLoc.push(data.response.groups[0].items[i].venue.url);
-				tempLoc.push(data.response.groups[0].items[i].venue.contact.formattedPhone)
-
-				longi = data.response.geocode.center.lng;
-				lat = data.response.geocode.center.lat;
-
-				console.log(tempLoc);
+				tempLoc.push(data.response.groups[0].items[i].venue.contact.formattedPhone);
 				locationArray.push(tempLoc);
-				console.log(locationArray[i][3], locationArray[i][4]);
+
 				var currentFeature = data.response.groups[0].items[i];
 				var prop = currentFeature.venue;
 					 // Select the listing container in the HTML and append a div
@@ -124,11 +120,11 @@ function setFourSquareArray(){
 					 var details = listing.appendChild(document.createElement('div'));
 					 details.innerHTML = (prop.categories[0].shortName + "</br>" + prop.location.formattedAddress);
       }
-			console.log("initaliting map-...");
+
+			console.log("initializing map-...");
+			longi = data.response.groups[0].items[0].venue.location.lng;
+			lat = data.response.groups[0].items[0].venue.location.lat;
 			initMap();
-
-
-    //  console.log(locationArray);
     },
     error: function(request, data, error)
     {
@@ -138,37 +134,48 @@ function setFourSquareArray(){
 
 }
 
+function blankMap()
+{
+	var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v10',
+    center: [longi, lat],
+    zoom: 12
+  });
+  map.addControl(new mapboxgl.NavigationControl());
+}
+
 function initMap()
 {
 	//nearQueryReplace
-	locationArray = [];
 	near = document.getElementById("location-input").value;
 	query = document.getElementById("food-input").value;
 	console.log(document.getElementById("other-input").value);
 	console.log("here are the places that came from the new search!!! pirya");
-	makeURL();
 
   console.log("gvasghjvdasgkhj");
 	console.log(longi + '' + lat);
-  map = new mapboxgl.Map({
+  var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v9',
+    style: 'mapbox://styles/mapbox/streets-v10',
     center: [longi, lat],
     zoom: 12
 
   });
-//  map.addControl(new mapboxgl.NavigationControl());
-//  createMarkers();
-
+  map.addControl(new mapboxgl.NavigationControl());
+  createMarkers();
 }
 
 function createMarkers()
 {
+		console.log("pirya is making the markers shindoodlez");
     geojson = {
-    type: 'FeatureCollection',
-    features: []
-  };
+    	type: 'FeatureCollection',
+    	features: []
+  	};
 
+	console.log("pirya is ready to make sum markerz");
+	console.log(locationArray.length);
   for(var i = 0; i < locationArray.length; i++)
   {
     var tempFeature =
@@ -183,27 +190,23 @@ function createMarkers()
         description: locationArray[i][2][0] + "\n" + locationArray[i][2][1] + "\n" + locationArray[i][2][2] ,
 				link: locationArray[i][6] ,
 				phone: locationArray[i][7]
-      },
-    };
+      	}
+    	};
     geojson.features.push(tempFeature);
-    console.log("pirya");
   }
-      // add markers to map
 
+    // add markers to map
     geojson.features.forEach(function(marker) {
-
     // create a HTML element for each feature
-    var el = document.createElement('div');
-    el.className = 'marker';
+    	var el = document.createElement('div');
+    	el.className = 'marker';
 
     // make a marker for each feature and add to the map
-    new mapboxgl.Marker(el, { offset: [0, -50 / 2] })
-    .setLngLat(marker.geometry.coordinates)
-		.setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-		.setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>' + marker.properties.link + '</p>' + marker.properties.phone))
-
-
-    .addTo(map);
+	    new mapboxgl.Marker(el, { offset: [0, -50 / 2] })
+	    .setLngLat(marker.geometry.coordinates)
+			.setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+			.setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>' + marker.properties.link + '</p>' + marker.properties.phone))
+	    .addTo(map);
     });
 
 }
