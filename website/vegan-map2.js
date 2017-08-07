@@ -1,6 +1,8 @@
-
 //GLOBAL VARIABLES
-var base_url = "https://api.foursquare.com/v2/venues/explore?client_id=R1ICCLL0IRSVK1YJBWFFW0H2EEJHW3AFN2BTP4ATJUA4N5PY&client_secret=TV5MY5PDMSOZA11XBS0ZI4OCL2F3PJVP4WVOQEUVOABCCUZT&v=20170801";
+var base_url =
+"https://api.foursquare.com/v2/venues/explore?client_id=R1ICCLL0IRSVK1YJBWFFW0H2EEJHW3AFN2BTP4ATJUA4N5PY&client_secret=TV5MY5PDMSOZA11XBS0ZI4OCL2F3PJVP4WVOQEUVOABCCUZT&v=20170801";
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGhhbnlhIiwiYSI6ImNqNXY5ZjBvcDBlaHcycXMzYXZvODdrbGkifQ.xCbroOR-qaieJKlfV9NHCA';
+
 var lat;
 var longi;
 var near;
@@ -24,9 +26,9 @@ $(document).ready(function() //waits for the document to all be ready before pro
     longi = coordinates.longitude;
     console.log(lat);
     console.log(longi);
-    near = prompt("Location? ");
+		near = document.getElementById("location-input").value;
     near = near.replace(" ", "%20");
-    query = prompt("What type of food? (vegan, vegetarian, halal, donuts etc.)");
+    query = document.getElementById("food-input").value;
     query = query.replace(' ', '%20');
     makeURL();
 	};
@@ -65,10 +67,11 @@ function setFourSquareArray(){
     crossDomain: true,
 
     success: function(data){
-      console.log("i've successfully read the json code");
+      console.log("i've successfully read the json code!!!");
 
 
       for (var i = 0; i < data.response.groups[0].items.length; i++) {
+				console.log("reading lat");
         var blegh = data.response.groups[0].items[i].venue.location.address;
           console.log(blegh);
           if (typeof blegh == "undefined"){
@@ -94,14 +97,34 @@ function setFourSquareArray(){
 				tempLoc.push(data.response.groups[0].items[i].venue.url);
 				tempLoc.push(data.response.groups[0].items[i].venue.contact.formattedPhone)
 
-				lat = data.response.geocode.center.lat;
 				longi = data.response.geocode.center.lng;
-
+				lat = data.response.geocode.center.lat;
 
 				console.log(tempLoc);
 				locationArray.push(tempLoc);
-				console.log(locationArray[i][3], locationArray[i][4])
+				console.log(locationArray[i][3], locationArray[i][4]);
+				var currentFeature = data.response.groups[0].items[i];
+				var prop = currentFeature.venue;
+					 // Select the listing container in the HTML and append a div
+					 // with the class 'item' for each store
+					 var listings = document.getElementById('section2');
+					 var listing = listings.appendChild(document.createElement('div'));
+					 listing.className = 'item';
+					 listing.id = 'section2-' + i;
+
+					 // Create a new link with the class 'title' for each store
+					 // and fill it with the store address
+					 var link = listing.appendChild(document.createElement('a'));
+					 link.href = prop.url;
+					 link.className = 'title';
+					 link.dataPosition = i;
+					 link.innerHTML = (prop.name);
+					 // Create a new div with the class 'details' for each store
+					 // and fill it with the city and phone number
+					 var details = listing.appendChild(document.createElement('div'));
+					 details.innerHTML = (prop.categories[0].shortName + "</br>" + prop.location.formattedAddress);
       }
+			console.log("initaliting map-...");
 			initMap();
 
 
@@ -115,21 +138,18 @@ function setFourSquareArray(){
 
 }
 
-//use ajax
-
-
-
-
-
-
-
-
-
 function initMap()
 {
+	//nearQueryReplace
+	locationArray = [];
+	near = document.getElementById("location-input").value;
+	query = document.getElementById("food-input").value;
+	console.log(document.getElementById("other-input").value);
+	console.log("here are the places that came from the new search!!! pirya");
+	makeURL();
+
   console.log("gvasghjvdasgkhj");
-  mapboxgl.accessToken = 'pk.eyJ1IjoiZGhhbnlhIiwiYSI6ImNqNXY5ZjBvcDBlaHcycXMzYXZvODdrbGkifQ.xCbroOR-qaieJKlfV9NHCA';
-	console.log(lat + '' + longi);
+	console.log(longi + '' + lat);
   map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
@@ -137,11 +157,8 @@ function initMap()
     zoom: 12
 
   });
-  map.addControl(new mapboxgl.NavigationControl());
-  createMarkers();
-
-
-
+//  map.addControl(new mapboxgl.NavigationControl());
+//  createMarkers();
 
 }
 
