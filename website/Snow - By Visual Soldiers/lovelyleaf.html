@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Lovely Leaf</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <meta property="og:title" content="">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="">
+	<meta property="og:site_name" content="">
+	<meta property="og:description" content="">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900|Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.1.0/mapbox-gl-geocoder.css' type='text/css' />
+
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <script src="js/modernizr-2.7.1.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+  <!-- /*Map*/ -->
+  #map { position:absolute; width:100%; height:200% }
+  <!-- /*#map-container { position:relative; height:100%}*/ -->
+  .marker {
+    background-image: url('google-marker.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .mapboxgl-popup {
+    max-width: 200px;
+  }
+  .mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+  }
+</style>
+</head>
+
+<body>
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="logo" href="index.html"><img src="img/logo.svg" alt="Logo"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#pricing" class="scroll">Map</a></li>
+            <li><a href="#">About Us</a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6">
+            <a href="index.html"><img src="img/logo.svg" alt="Logo"></a>
+          </div>
+          <div class="col-xs-6 signin text-right navbar-nav">
+            <a href="#pricing" class="scroll">Map</a>&nbsp; &nbsp;<a href="#Sign In" class="scroll">About Us</a>
+          </div>
+        </div>
+
+        <div class="row header-info">
+          <div class="col-sm-10 col-sm-offset-1 text-center">
+            <h1 class="wow fadeIn">A map for your dietary needs.</h1>
+            <br/>
+            <p class="lead wow fadeIn" data-wow-delay="0.5s">Type in your dietary restriction, location, and preferences
+            for a list of nearby restaurants fulfilling your conditions.</p>
+
+
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                <div class="row">
+                  <!-- <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1.4s">
+                    <a href="#invite" class="btn btn-primary btn-lg scroll">Request Invite</a>
+                  </div> -->
+                    <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1s">
+                      <div class:"input-group-btn">
+                        <div class="dropdown" id="dropdown1">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="dropDownButton">Dietary Restrictions
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                              <center><a id="vegan" onclick="setvegan()">Vegan</a></center>
+                              <li class="divider"></li>
+                              <center><a id="vegetarian">Vegetarian</a></center>
+                              <li class="divider"></li>
+                              <center><a id="halal">Halal</a></center>
+                              <li class="divider"></li>
+                              <center><a id="kosher">Kosher</a></center>
+                              <li class="divider"></li>
+                              <center><a id="gluten-free">Gluten Free</a></center>
+                              <li class="divider"></li>
+                  <!--            <center><input type="text" id="rest-input" name="text" placeholder="Other"></center>-->
+                              <input id="other-input" type="text" name="text" placeholder="Other">
+
+                            </ul>
+                          </div>
+
+                        </div>
+                      </div>
+                      <center><div class="col-xs-6 text-center wow fadeInUp" data-wow-delay="1.4s">
+                        <input id="location-input" type="text" name="text" placeholder="Enter city">
+                      </div></center>
+                      <div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="1.8s">
+                        <button onclick="makeURL()"><a href="#be-the-first" class="btn btn-secondary btn-lg scroll">Go!</a></button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+    </header>
+
+    <!-- <div class="mouse-icon hidden-xs">
+				<div class="scroll"></div>
+			</div> -->
+
+    <section id="be-the-first" class="pad-xl">
+      <div id="section1" class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
+            <h2>Nearby Restaurants</h2>
+            <!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipis.</p> -->
+          </div>
+        </div>
+
+        <div id="section2"class=iphone wow fadeInUp data-wow-delay="1s">
+          <div id="map-container" class="wrapper">
+            <div id='map' class="container"></div>
+            <script src= "lovelymap.js"></script>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="main-info" class="pad-xl">
+	    <div class="container">
+		    <div class="row">
+
+		    </div>
+	    </div>
+    </section>
+
+
+    <!--Pricing-->
+    <section id="section3" class="pad-lg">
+      <div class="container">
+        <div class="row margin-40">
+          <div class="col-sm-8 col-sm-offset-2 text-center">
+            <h2 class="white">Results</h2>
+          </div>
+        </div>
+
+        <div class="row margin-50">
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="invite" class="pad-lg light-gray-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 text-center">
+            <i class="fa fa-envelope-o margin-40"></i>
+            <h2 class="black">Get the invite</h2>
+            <br />
+            <p class="black">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut.</p>
+            <br />
+
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <form role="form">
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-lg">Request Invite</button>
+                </form>
+              </div>
+            </div><!--End Form row-->
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="press" class="pad-sm">
+      <div class="container">
+
+        <div class="row margin-30 news-container">
+          <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wow fadeInLeft" data-wow-delay="0.8s">
+            <a href="#" target="_blank">
+            <img class="news-img pull-left" src="img/press-01.jpg" alt="Tech Crunch">
+            <p class="black">Priya is a rising senior at Monta Vista High School. <br />
+            <small><em>Tech Crunch - January 15, 2015</em></small></p>
+            </a>
+          </div>
+        </div>
+
+        <div class="row margin-30 news-container">
+          <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wow fadeInLeft" data-wow-delay="1.2s">
+            <a href="#" target="_blank">
+            <img class="news-img pull-left" src="img/press-02.jpg" alt="Forbes">
+            <p class="black">Sahana is a rising senior at Saratoga High School. <br />
+            <small><em>Forbes - Feb 25, 2015</em></small></p>
+            </a>
+          </div>
+        </div>
+
+        <div class="row margin-30 news-container">
+          <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wow fadeInLeft" data-wow-delay="1.2s">
+            <a href="#" target="_blank">
+            <img class="news-img pull-left" src="img/press-02.jpg" alt="Forbes">
+            <p class="black">Dhanya is a rising junior at Cupertino High School <br />
+            <small><em>Forbes - Feb 25, 2015</em></small></p>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <footer>
+      <div class="container">
+
+        <div class="row">
+          <div class="col-sm-8 margin-20">
+            <ul class="list-inline social">
+              <li>Connect with us on</li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+          </div>
+
+          <div class="col-sm-4 text-right">
+            <p><small>Copyright &copy; 2017. All rights reserved. <br>
+	            Created by Priya Reddy, Sahana Sripadanna, and Dhanyasree Prem Sankar.</small></p>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+
+    <!-- Javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    document.getElementById("vegan").onclick = function(){//do something}
+      console.log("test");
+      document.getElementById("dropDownButton").innerHTML = "Vegan";
+    }
+    document.getElementById("vegetarian").onclick = function(){//do something}
+      console.log("test");
+      document.getElementById("dropDownButton").innerHTML = "Vegetarian";
+    }
+    document.getElementById("halal").onclick = function(){//do something}
+      console.log("test");
+      document.getElementById("dropDownButton").innerHTML = "Halal";
+    }
+    document.getElementById("kosher").onclick = function(){//do something}
+      console.log("test");
+      document.getElementById("dropDownButton").innerHTML = "Kosher";
+    }
+    document.getElementById("gluten-free").onclick = function(){//do something}
+      console.log("test");
+      document.getElementById("dropDownButton").innerHTML = "Gluten Free";
+    }
+    </script> -->
+
+
+    </body>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.1.0/mapbox-gl-geocoder.min.js'></script>
+</html>

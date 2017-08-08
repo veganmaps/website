@@ -155,14 +155,14 @@ function initMap()
 
   console.log("gvasghjvdasgkhj");
 	console.log(longi + '' + lat);
-  map = new mapboxgl.Map({
+  map = mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v10',
     center: [longi, lat],
     zoom: 12
 
   });
-  map.addControl(new mapboxgl.NavigationControl());
+  map.addControl(mapboxgl.NavigationControl());
   createMarkers();
 }
 
@@ -185,12 +185,12 @@ function createMarkers()
         type: 'Point',
         coordinates: [locationArray[i][4], locationArray[i][3]]
       },
-      properties: {
-        title: locationArray[i][0] ,
-        description: locationArray[i][2][0] + "\n" + locationArray[i][2][1] + "\n" + locationArray[i][2][2] ,
-				link: locationArray[i][6] ,
-				phone: locationArray[i][7]
-				},
+	      properties: {
+	        title: locationArray[i][0] ,
+	        description: locationArray[i][2][0] + "\n" + locationArray[i][2][1] + "\n" + locationArray[i][2][2] ,
+					link: locationArray[i][6] ,
+					phone: locationArray[i][7]
+					},
     	};
     geojson.features.push(tempFeature);
 		console.log("wrote sum descriptions");
@@ -210,7 +210,7 @@ function createMarkers()
 			.addTo(map);
 			console.log(marker.properties.title + '</h3><p>' + marker.properties.description + '</p>' + marker.properties.link + '</p>' + marker.properties.phone)
 			});
-		console.log(tempFeature.properties.title);
+		console.log(marker.properties.title);
 		console.log(map);
 
 }
