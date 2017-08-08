@@ -43,7 +43,7 @@ function makeURL() // all the appends
 {
 	near = document.getElementById("location-input").value;
 	near = near.replace(" ", "%20");
-	query = document.getElementById("other-input").value;
+	// query = document.getElementById("other-input").value;
 	query = query.replace(' ', '%20');
 
   base_url += "&ll=" + lat + "," + longi;
@@ -217,21 +217,32 @@ function createMarkers()
 
 document.getElementById("vegan").onclick = function(){//do something}
 	(query = "vegan");
+	console.log(query);
 	document.getElementById("dropDownButton").innerHTML = "Vegan";
 }
 document.getElementById("vegetarian").onclick = function(){//do something}
 	(query = "vegetarian");
+	console.log(query);
 	document.getElementById("dropDownButton").innerHTML = "Vegetarian";
 }
 document.getElementById("halal").onclick = function(){//do something}
 	(query = "halal");
+	console.log(query);
 	document.getElementById("dropDownButton").innerHTML = "Halal";
 }
 document.getElementById("kosher").onclick = function(){//do something}
 	(query = "kosher");
+	console.log(query);
 	document.getElementById("dropDownButton").innerHTML = "Kosher";
 }
 document.getElementById("gluten-free").onclick = function(){//do something}
 	(query = "gluten-free");
+	console.log(query);
 	document.getElementById("dropDownButton").innerHTML = "Gluten Free";
+
+}
+// document.getElementById("go").onclick = function(){//do something}
+// 	if other-input ==
+
+
 }
