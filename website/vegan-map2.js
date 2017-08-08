@@ -43,7 +43,7 @@ function makeURL() // all the appends
 {
 	near = document.getElementById("location-input").value;
 	near = near.replace(" ", "%20");
-	query = document.getElementById("food-input").value;
+	query = document.getElementById("other-input").value;
 	query = query.replace(' ', '%20');
 
   base_url += "&ll=" + lat + "," + longi;
@@ -149,13 +149,13 @@ function initMap()
 {
 	//nearQueryReplace
 	near = document.getElementById("location-input").value;
-	query = document.getElementById("food-input").value;
+	query = document.getElementById("other-input").value;
 	console.log(document.getElementById("other-input").value);
 	console.log("here are the places that came from the new search!!! pirya");
 
   console.log("gvasghjvdasgkhj");
 	console.log(longi + '' + lat);
-  var map = new mapboxgl.Map({
+  map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v10',
     center: [longi, lat],
@@ -190,23 +190,27 @@ function createMarkers()
         description: locationArray[i][2][0] + "\n" + locationArray[i][2][1] + "\n" + locationArray[i][2][2] ,
 				link: locationArray[i][6] ,
 				phone: locationArray[i][7]
-      	}
+				},
     	};
     geojson.features.push(tempFeature);
-  }
+		console.log("wrote sum descriptions");
+}
 
-    // add markers to map
+    console.log('add markers to map');
     geojson.features.forEach(function(marker) {
     // create a HTML element for each feature
     	var el = document.createElement('div');
     	el.className = 'marker';
 
-    // make a marker for each feature and add to the map
+    console.log("make a marker for each feature and add to the map");
 	    new mapboxgl.Marker(el, { offset: [0, -50 / 2] })
 	    .setLngLat(marker.geometry.coordinates)
 			.setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-			.setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>' + marker.properties.link + '</p>' + marker.properties.phone))
-	    .addTo(map);
-    });
+			.setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p><p>' + marker.properties.link + '</p><p>' + marker.properties.phone + '</p>'))
+			.addTo(map);
+			console.log(marker.properties.title + '</h3><p>' + marker.properties.description + '</p>' + marker.properties.link + '</p>' + marker.properties.phone)
+			});
+		console.log(tempFeature.properties.title);
+		console.log(map);
 
 }
