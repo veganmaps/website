@@ -243,6 +243,3 @@ document.getElementById("gluten-free").onclick = function(){//do something}
 }
 // document.getElementById("go").onclick = function(){//do something}
 // 	if other-input ==
-
-
-}
