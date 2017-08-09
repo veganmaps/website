@@ -27,7 +27,6 @@ $(document).ready(function() //waits for the document to all be ready before pro
     console.log(lat);
     console.log(longi);
 		blankMap();
-  //  makeURL();
 	};
 
   function error(err) // if the user declines to give loocal address
@@ -43,19 +42,35 @@ function makeURL() // all the appends
 {
 	near = document.getElementById("location-input").value;
 	near = near.replace(" ", "%20");
-	// query = document.getElementById("other-input").value;
-	query = query.replace(' ', '%20');
+	// if (document.getElementById("other-input").value == null) {
+		query = query.replace(' ', '%20');
 
-  base_url += "&ll=" + lat + "," + longi;
-  base_url += "&near=" + near;
-  base_url += "&radius=" + radius;
-  base_url += "&query=" + query;
-  base_url += "&time=" + time;
-  base_url += "&day=" + day;
-  base_url += "&venuePhotos=" + venuePhotos;
-  base_url += "&sortByDistance" + sortByDistance;
-  console.log(base_url);
-  setFourSquareArray();
+		base_url += "&ll=" + lat + "," + longi;
+		base_url += "&near=" + near;
+		base_url += "&radius=" + radius;
+		base_url += "&query=" + query;
+		base_url += "&time=" + time;
+		base_url += "&day=" + day;
+		base_url += "&venuePhotos=" + venuePhotos;
+		base_url += "&sortByDistance" + sortByDistance;
+		console.log(base_url);
+		setFourSquareArray();
+	// }
+	// else {
+	// 	query = document.getElementById('other.input').value;
+	// 	query = query.replace(' ', '%20');
+	//
+	// 	base_url += "&ll=" + lat + "," + longi;
+	// 	base_url += "&near=" + near;
+	// 	base_url += "&radius=" + radius;
+	// 	base_url += "&query=" + query;
+	// 	base_url += "&time=" + time;
+	// 	base_url += "&day=" + day;
+	// 	base_url += "&venuePhotos=" + venuePhotos;
+	// 	base_url += "&sortByDistance" + sortByDistance;
+	// 	console.log(base_url);
+	// 	setFourSquareArray();
+	// }
 }
 
 
@@ -118,7 +133,7 @@ function setFourSquareArray(){
 					 // Create a new div with the class 'details' for each store
 					 // and fill it with the city and phone number
 					 var details = listing.appendChild(document.createElement('div'));
-					 details.innerHTML = (prop.categories[0].shortName + "</br>" + prop.location.formattedAddress);
+					 details.innerHTML = ("</br>" + prop.categories[0].shortName + "</br>" + prop.location.formattedAddress +   "class= divider");
       }
 
 			console.log("initializing map-...");
@@ -150,8 +165,6 @@ function initMap()
 	//nearQueryReplace
 	near = document.getElementById("location-input").value;
 	query = document.getElementById("other-input").value;
-
-		(query = "vegan")
 	console.log(document.getElementById("other-input").value);
 	console.log("here are the places that came from the new search!!! pirya");
 
@@ -241,5 +254,3 @@ document.getElementById("gluten-free").onclick = function(){//do something}
 	document.getElementById("dropDownButton").innerHTML = "Gluten Free";
 
 }
-// document.getElementById("go").onclick = function(){//do something}
-// 	if other-input ==

@@ -96,16 +96,13 @@
             <div class="row">
               <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                 <div class="row">
-                  <!-- <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1.4s">
-                    <a href="#invite" class="btn btn-primary btn-lg scroll">Request Invite</a>
-                  </div> -->
                     <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1s">
                       <div class:"input-group-btn">
                         <div class="dropdown" id="dropdown1">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="dropDownButton">Dietary Restrictions
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                              <center><a id="vegan" onclick="setvegan()">Vegan</a></center>
+                              <center><a id="vegan">Vegan</a></center>
                               <li class="divider"></li>
                               <center><a id="vegetarian">Vegetarian</a></center>
                               <li class="divider"></li>
@@ -123,11 +120,11 @@
 
                         </div>
                       </div>
-                      <center><div class="col-xs-6 text-center wow fadeInUp" data-wow-delay="1.4s">
+                      <div class="wow fadeInUp" data-wow-delay="1.4s">
                         <input id="location-input" type="text" name="text" placeholder="Enter city">
-                      </div></center>
+                      </div>
                       <div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="1.8s">
-                        <button id="go" onclick="makeURL()"><a href="#be-the-first" class="btn btn-secondary btn-lg scroll">Go!</a></button>
+                        <button id="go" onclick="makeURL()"><a href="#showmap" class="btn btn-secondary btn-lg scroll">Go!</a></button>
                       </div>
                     </div>
 
@@ -135,22 +132,21 @@
                 </div>
               </div>
             </div>
-    </header>
+          </header>
 
     <!-- <div class="mouse-icon hidden-xs">
 				<div class="scroll"></div>
 			</div> -->
 
-    <section id="be-the-first" class="pad-xl">
+    <section id="showmap" class="pad-xl">
       <div id="section1" class="container">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
-            <h2>Nearby Restaurants</h2>
-            <!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipis.</p> -->
+            <h2>Nearby Locations</h2>
           </div>
         </div>
 
-        <div id="section2"class=iphone wow fadeInUp data-wow-delay="1s">
+        <div id="section2" class= iphone wow fadeInUp data-wow-delay="1s">
           <div id="map-container" class="wrapper">
             <div id='map' class="container"></div>
             <script src= "lovelymap.js"></script>
@@ -159,21 +155,12 @@
       </div>
     </section>
 
-    <section id="main-info" class="pad-xl">
-	    <div class="container">
-		    <div class="row">
-
-		    </div>
-	    </div>
-    </section>
-
-
     <!--Pricing-->
-    <section id="section3" class="pad-lg">
+    <section id="section3" class="pad-lg" style="background-color: #70cbce">
       <div class="container">
         <div class="row margin-40">
           <div class="col-sm-8 col-sm-offset-2 text-center">
-            <h2 class="white">Results</h2>
+            <h2 class="white">Restaurants</h2>
           </div>
         </div>
 
@@ -219,8 +206,8 @@
           <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wow fadeInLeft" data-wow-delay="0.8s">
             <a href="#" target="_blank">
             <img class="news-img pull-left" src="img/press-01.jpg" alt="Tech Crunch">
-            <p class="black">Priya is a rising senior at Monta Vista High School. <br />
-            <small><em>Tech Crunch - January 15, 2015</em></small></p>
+            <h3>Priya Reddy</h3>
+            <p class="black">Priya is a rising senior at Monta Vista High School. <br /></p>
             </a>
           </div>
         </div>
@@ -229,8 +216,8 @@
           <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wow fadeInLeft" data-wow-delay="1.2s">
             <a href="#" target="_blank">
             <img class="news-img pull-left" src="img/press-02.jpg" alt="Forbes">
-            <p class="black">Sahana is a rising senior at Saratoga High School. <br />
-            <small><em>Forbes - Feb 25, 2015</em></small></p>
+            <h3>Sahana Sripadanna</h3>
+            <p class="black">Sahana is a rising senior at Saratoga High School. <br /></p>
             </a>
           </div>
         </div>
@@ -239,8 +226,8 @@
           <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wow fadeInLeft" data-wow-delay="1.2s">
             <a href="#" target="_blank">
             <img class="news-img pull-left" src="img/press-02.jpg" alt="Forbes">
-            <p class="black">Dhanya is a rising junior at Cupertino High School <br />
-            <small><em>Forbes - Feb 25, 2015</em></small></p>
+            <h3>Dhanyasree Prem Sankar</h3>
+            <p class="black">Dhanya is a rising junior at Cupertino High School. <br /></p>
             </a>
           </div>
         </div>

@@ -80,7 +80,7 @@ p {
 
 /*------------------Utilities---------------------*/
 a {
-  color: inherit;
+  color: white;
   font-weight: inherit;
   font-size: inherit;
   text-decoration: none;
@@ -390,7 +390,7 @@ header {
 
 
 
-#be-the-first {
+#showmap {
   background: url(../img/be-the-first-bg.jpg) #231f20 no-repeat center center fixed;
   min-height: 300px;
   -webkit-background-size: cover;
@@ -478,7 +478,7 @@ footer {
 /*---------------Pricing Tables-------------------*/
 
 
-#pricing {
+#section3 {
   background: #70cbce;
 }
 
@@ -650,7 +650,7 @@ footer {
   letter-spacing: 0px;
 }
 
-#be-the-first {
+#showmap {
       background-attachment: scroll;
   }
 
@@ -660,7 +660,7 @@ footer {
 /* Landscape phone to portrait tablet */
 @media (min-width: 481px) and (max-width: 767px) {
 
-#be-the-first {
+#showmap {
       background-attachment: scroll;
   }
 
@@ -670,7 +670,7 @@ footer {
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 991px) {
 
-#be-the-first {
+#showmap {
       background-attachment: scroll;
   }
 
