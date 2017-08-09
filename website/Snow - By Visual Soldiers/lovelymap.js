@@ -43,6 +43,16 @@ function makeURL() // all the appends
 	near = document.getElementById("location-input").value;
 	near = near.replace(" ", "%20");
 	// if (document.getElementById("other-input").value == null) {
+	console.log(query);
+	//console.log(document.getElementById("other-input").value);
+
+	if (document.getElementById("other-input").value != ''){
+		console.log("other input is not null");
+		query = document.getElementById("other-input").value;
+	}
+
+	console.log("query is:" + query);
+
 		query = query.replace(' ', '%20');
 
 		base_url += "&ll=" + lat + "," + longi;
@@ -133,7 +143,7 @@ function setFourSquareArray(){
 					 // Create a new div with the class 'details' for each store
 					 // and fill it with the city and phone number
 					 var details = listing.appendChild(document.createElement('div'));
-					 details.innerHTML = ("</br>" + prop.categories[0].shortName + "</br>" + prop.location.formattedAddress +   "class= divider");
+					 details.innerHTML = ("</br>" + prop.categories[0].shortName + "</br>" + prop.location.formattedAddress);
       }
 
 			console.log("initializing map-...");

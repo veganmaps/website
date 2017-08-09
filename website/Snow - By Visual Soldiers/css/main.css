@@ -11,7 +11,7 @@
 /* ==========================================================================
    Global styles
    ========================================================================== */
-h1, h2, h3, h4, h5, h6, p, .btn, .navbar-nav a, .form-control, .list-inline, small, #pricing {
+h1, h2, h3, h4, h5, h6, p, .btn, .navbar-nav a, .form-control, .list-inline, small, #section3 {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -80,10 +80,13 @@ p {
 
 /*------------------Utilities---------------------*/
 a {
-  color: white;
+  color: inherit;
   font-weight: inherit;
   font-size: inherit;
   text-decoration: none;
+}
+a, #section3 {
+  color: white;
 }
 
 a:hover, a:focus {
@@ -294,7 +297,7 @@ a:hover, a:focus {
 }
 
 .logo img {
-	margin-top: 6px;
+	margin-top: 30px;
 }
 
 
@@ -303,7 +306,7 @@ a:hover, a:focus {
    Main styles
    ========================================================================== */
 header {
-  background: url(../img/header-bg.jpg) no-repeat center center;
+  background: url(../header-bg1.png) no-repeat center center;
   width: 100%;
   padding: 20px 10px 60px 10px;
   height: 100vh;
@@ -328,7 +331,7 @@ header {
   padding-top: 9px;
 }
 
-
+/*
 .mouse-icon {
     border: 2px solid #fff;
     border-radius: 16px;
@@ -356,7 +359,7 @@ header {
     position: relative;
     top: 4px;
     width: 4px;
-}
+}*/
 @keyframes scrolling {
 0% {
     opacity: 0;
@@ -391,7 +394,7 @@ header {
 
 
 #showmap {
-  background: url(../img/be-the-first-bg.jpg) #231f20 no-repeat center center fixed;
+  background: url(../resized-bg.png) no-repeat center center fixed;
   min-height: 300px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -482,12 +485,12 @@ footer {
   background: #70cbce;
 }
 
-.pricing-container {
+.section3-container {
   padding-left: 0px;
   padding-right: 0px;
 }
 
-.pricing-table {
+/*.section3-table {
   background: transparent;
   margin-bottom: 50px;
   margin-top: 0px;
@@ -496,7 +499,7 @@ footer {
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
-.pricing-table.active {
+.section3-table.active {
   box-shadow: 0px 0px 12px rgba(41,46,50,0.6);
   position: absolute;
   margin: auto;
@@ -505,7 +508,7 @@ footer {
   border-top-right-radius: 10px;
 }
 
-.pricing-table:hover {
+.section3-table:hover {
   margin-top: -10px;
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
@@ -516,7 +519,7 @@ footer {
 .pricing-table li {
   padding-left: 20px;
   padding-right: 20px;
-}
+}*/
 
 .headline {
   background: #231f20;
